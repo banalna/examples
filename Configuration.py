@@ -87,7 +87,7 @@ options = OptionsResolver.resolve(config)  # Result: param1=ABC;param2=123
 
 ########################################################################################################################
 class IConfigReader(ABC):
-    def read_config(self, correlation_id: str, parameters: ConfigParams):
+    def _read_config(self, correlation_id: str, parameters: ConfigParams):
         raise NotImplementedError('Method from interface definition')
 
 
@@ -110,7 +110,7 @@ result = config_reader.read_config("123", parameters)
 ########################################################################################################################
 config_reader = JsonConfigReader("config.json")
 parameters = ConfigParams.from_tuples("KEY1_VALUE", 123, "KEY2_VALUE", "ABC")
-result = config_reader.read_config("correlationId", parameters)
+result = config_reader._read_config("correlationId", parameters)
 # Result: key1=1234;key2=ABCD
 
 ########################################################################################################################
@@ -122,7 +122,7 @@ result = config_reader.read_config("correlationId", parameters)
 ########################################################################################################################
 config_reader = YamlConfigReader("config.yml")
 parameters = ConfigParams.from_tuples("KEY1_VALUE", 123, "KEY2_VALUE", "ABC")
-result = config_reader.read_config("correlationId", parameters)
+result = config_reader._read_config("correlationId", parameters)
 # Result: key1=1234;key2=ABCD
 
 
